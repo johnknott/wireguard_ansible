@@ -1,14 +1,13 @@
 ---
  - name: Install unbound
-   apt: name={{ item }} state=installed update_cache=true
+   pacman: name={{ item }} state=installed update_cache=true
    with_items:
      - unbound
-     - unbound-host
 
  - name: Download the list of Root DNS Server
    get_url:
      url: https://www.internic.net/domain/named.cache
-     dest: /var/lib/unbound/root.hints
+     dest: /etc/unbound/root.hints
      owner: unbound
      group: unbound
 
@@ -23,9 +22,9 @@
      enabled: yes
      state: started
 
- - name: Set var/lib/unbound ownership
+ - name: Set /etc/unbound ownership
    file:
-     path: /var/lib/unbound
+     path: /etc/unbound
      owner: unbound
      group: unbound
      recurse: yes 

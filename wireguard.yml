@@ -11,18 +11,13 @@
     command: uname -r
     register: kernel_release
 
-  - name: Add the WireGuard PPA
-    apt_repository:
-      repo: 'ppa:wireguard/wireguard'
-
   - name: Install WireGuard and other requirements 
-    apt: name={{ item }} state=installed update_cache=true
+    pacman: name={{ item }} state=installed update_cache=true
     with_items:
-      - linux-headers-{{ kernel_release.stdout }}
-      - linux-headers-generic
+      - linux-headers
       - wireguard-dkms
       - wireguard-tools
-      - python2.7
+      - python2
 
   - name: Generate private and public keys for the client and server
     shell: umask 077; wg genkey | tee {{ item.private }} | wg pubkey > {{ item.public }}

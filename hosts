@@ -1,2 +1,2 @@
 [all]
-<ip> ansible_python_interpreter=/usr/bin/python3
+resolved.app ansible_python_interpreter=/usr/bin/python3

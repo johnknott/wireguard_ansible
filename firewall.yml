@@ -60,7 +60,7 @@
      jump: MASQUERADE  
 
  - name: Install iptables-persistent
-   apt: pkg=iptables-persistent state=installed update_cache=true
+   pacman: pkg=iptables state=installed update_cache=true
 
  - name: Set up iptables persistence
-   command: netfilter-persistent save
+   shell: iptables-save > /etc/iptables/iptables.rules
